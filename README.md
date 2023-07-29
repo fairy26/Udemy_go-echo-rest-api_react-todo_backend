@@ -59,6 +59,7 @@ Successfully Migrated
 -   `GO_ENV`の値は `.env` を読み込む前なので、コマンドで渡す必要がある
 
 -   pgAdmin で出来ているか確認
+
     -   Add New Server
         -   General
             -   name: "DB" (なんでもいい)
@@ -71,3 +72,33 @@ Successfully Migrated
     -   DB > Databases > Schemas > Tables
         -   それぞれを右クリック > View/Edit Data > All Rows
         -   カラムが正しいことを確認する
+
+-   User に関する機能を実装する
+
+```bash
+$ mkdir repository && touch repository/user_repository.go
+$ mkdir usecase && touch usecase/user_usecase.go
+$ mkdir controller && touch controller/user_controller.go
+$ mkdir router && touch router/router.go
+$ touch main.go
+```
+
+```bash
+# 起動
+$ GO_ENV=dev go run ./main.go
+```
+
+-   postman で挙動確認
+    -   `+` で API を叩くタブを追加
+        -   POST `http://localhost:8080/signup`
+            -   Body > raw > JSON
+                ```JSON
+                {
+                    "email": "fairy1@test.com",
+                    "password": "fairy4216"
+                }
+                ```
+            -   SEND
+            -   pgAdmin の users にレコードが追加されていることを確認する
+    -   同じ request body で `/login` `/logout` も叩く
+        -   Cookie が設定（消去）されていることを確認する
