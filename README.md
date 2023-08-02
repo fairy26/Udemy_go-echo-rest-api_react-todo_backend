@@ -102,3 +102,35 @@ $ GO_ENV=dev go run ./main.go
             -   pgAdmin の users にレコードが追加されていることを確認する
     -   同じ request body で `/login` `/logout` も叩く
         -   Cookie が設定（消去）されていることを確認する
+
+```bash
+$ touch repository/task_repository.go
+$ touch usecase/task_usecase.go
+$ touch controller/task_controller.go
+
+$ GO_ENV=dev go run ./main.go
+```
+
+-   postman で挙動確認
+    -   GET `http://localhost:8080/tasks/`
+        -   401 Unauthorized
+    -   POST `http://localhost:8080/login`
+    -   GET `http://localhost:8080/tasks/`
+    -   POST `http://localhost:8080/tasks/`
+        ```JSON
+        {
+            "title": "hello"
+        }
+        ```
+        -   2 回
+    -   GET `http://localhost:8080/tasks/2`
+    -   PUT `http://localhost:8080/tasks/2`
+        ```JSON
+        {
+            "title": "updated"
+        }
+        ```
+    -   DELETE `http://localhost:8080/tasks/2`
+    -   POST `http://localhost:8080/logout`
+    -   DELETE `http://localhost:8080/tasks/1`
+        -   401 Unauthorized
