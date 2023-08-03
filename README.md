@@ -140,5 +140,15 @@ $ mkdir validator && touch validator/user_validator.go validator/task_validator.
 ```
 
 -   postman で挙動確認
+
     -   login 周りは validation が効いていることを確認
-    -   FIXME: `tasks/` を叩くと 404 Not Found になるが、原因がよくわかっていない
+
+-   CORS/CSRF の middleware を追加
+-   postman で挙動確認
+    -   GET `/csrf` で token を取得
+    -   POST `/login`, POST `/tasks` の際に以下を Header に追加
+        ```JSON
+        {
+            "X-CSRF-TOKEN": "WVdqEsL5wqa1BnhkvGMdSUbTx9Xg9QXD" // e.g.
+        }
+        ```
