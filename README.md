@@ -134,3 +134,11 @@ $ GO_ENV=dev go run ./main.go
     -   POST `http://localhost:8080/logout`
     -   DELETE `http://localhost:8080/tasks/1`
         -   401 Unauthorized
+
+```bash
+$ mkdir validator && touch validator/user_validator.go validator/task_validator.go
+```
+
+-   postman で挙動確認
+    -   login 周りは validation が効いていることを確認
+    -   FIXME: `tasks/` を叩くと 404 Not Found になるが、原因がよくわかっていない
